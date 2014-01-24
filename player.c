@@ -6,16 +6,13 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/23 23:00:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/24 01:18:00 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/24 14:28:00 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
-
-#include <unistd.h>
-#include <get_next_line.h>
 #include <libft.h>
+#include <get_next_line.h>
 
 static int			begins_with(char *s1, char *s2)
 {
@@ -52,51 +49,12 @@ static int			get_player_info(char **player_name)
 	return (0);
 }
 
-static int			*get_board_line()
-{
-	int				gnl_result;
-	char			*line;
-
-	gnl_result = get_next_line(0, &line);
-	while (gnl_result > 0)
-	{
-		printf("%s\n", line);
-		gnl_result = get_next_line(0, &line);
-	}
-	return (0);
-}
-
-// static int			**get_board()
-// {
-
-	// return
-// }
-
-static 				game_loop()
-{
-	// START LOOP CHECKING PLATEAU
-	while ()
-	{
-		get_grid_size;
-
-		
-	}
-}
-
 int					main(void)
 {
 	int				player_number;
 	char			*player_name;
 
-	// Read the STDIN
 	player_number = get_player_info(&player_name);
-	printf("%s plays as player number %d\n", player_name, player_number);
-	get_grid_line();
-
-	// CALCULATE
-	printf("3 5\n");
-
-	// Print hit in STDOUT
-	
+	game_loop(player_number, player_name);
 	return (0);
 }
