@@ -6,7 +6,7 @@
 #    By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/12/14 02:31:26 by cfeijoo           #+#    #+#              #
-#    Updated: 2014/01/24 01:18:03 by cfeijoo          ###   ########.fr        #
+#    Updated: 2014/01/24 22:47:43 by cfeijoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 CFILES =	player.c			\
+			get_board_loop.c	\
 			get_next_line.c
 
 OFILES = $(CFILES:.c=.o)

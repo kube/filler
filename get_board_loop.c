@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/24 14:09:16 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/24 14:27:59 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/24 23:04:23 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ static int			**get_board()
 
 void					game_loop(int player_number, char *player_name)
 {
-	while ()
-	{
-		get_grid_size;
+	int					**board;
+	char				*line;
 
+	while ((gnl_result = get_next_line(0, &line)) > 0)
+	{
 		
+		get_board();
 	}
 }
