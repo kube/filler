@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/23 23:00:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/24 14:28:00 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/25 16:29:27 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int			get_player_info(char **player_name)
 		if (!begins_with(" : ", line + i))
 			exit(1);
 		*player_name = line + i + 3;
-		return (atoi(line + 10));
+		return (ft_atoi(line + 10));
 	}
 	else
 		exit(1);
