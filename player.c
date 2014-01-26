@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/23 23:00:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/26 17:19:47 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 18:57:59 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int					main(void)
 	env->player_number = get_player_info(&env->player_name);
 	env->board = NULL;
 	env->piece = NULL;
-	/* Need to initialize players areas */
+	env->areas[0].width = 0;
+	env->areas[0].height = 0;
+	env->areas[1].width = 0;
+	env->areas[1].height = 0;
 	game_loop(env);
 	return (0);
 }

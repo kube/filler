@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/26 00:34:25 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/26 17:20:50 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 19:02:06 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ typedef struct						s_env
 	int								width;
 	int								height;
 	t_piece							*piece;
-	t_player_area					p1_area;
-	t_player_area					p2_area;
+	t_player_area					areas[2];
 }									t_env;
 
 void	game_loop(t_env *env);
