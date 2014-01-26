@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/23 23:00:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/26 01:05:29 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 17:19:47 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ static int			get_player_info(char **player_name)
 
 int					main(void)
 {
-	int				player_number;
-	char			*player_name;
+	t_env			*env;
 
-	player_number = get_player_info(&player_name);
-	game_loop(player_number);
+	env = (t_env*)malloc(sizeof(t_env));
+	env->player_number = get_player_info(&env->player_name);
+	env->board = NULL;
+	env->piece = NULL;
+	/* Need to initialize players areas */
+	game_loop(env);
 	return (0);
 }

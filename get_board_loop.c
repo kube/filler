@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/24 14:09:16 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/26 01:05:27 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 17:21:03 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,8 @@ static int				*update_board_line(char *line, int *board_line, int width)
 			board_line[k] = 2;
 		k++;
 	}
-	if (line[i] != 0 || k != width)
-	{
-		ft_putnbr(k);
-		ft_putendl(" ERROR HERE!");
+	if (line[i + k] != 0 || k != width)
 		exit(1);
-	}
 	return (0);
 }
 
@@ -115,51 +111,52 @@ static int				**create_board(int width, int height)
 **	FOR TESTS ONLY !
 */
 
-static void				TEST_display_board(int **board, int width, int height)
-{
-	int					i;
-	int					j;
+// static void				TEST_display_board(int **board, int width, int height)
+// {
+// 	int					i;
+// 	int					j;
 
-	i = 0;
-	j = 0;
-	while (j < height)
-	{
-		while (i < width)
-		{
-			ft_putchar(board[j][i] + '0');
-			i++;
-		}
-		ft_putchar('\n');
-		j++;
-	}
+// 	i = 0;
+// 	j = 0;
+// 	while (j < height)
+// 	{
+// 		i = 0;
+// 		while (i < width)
+// 		{
+// 			ft_putchar(board[j][i] + '0');
+// 			i++;
+// 		}
+// 		ft_putchar('\n');
+// 		j++;
+// 	}
+// }
+
+static void				clear_piece(t_piece *piece)
+{
+	free(piece->data);
+	free(piece->piece);
+	free(piece);
 }
 
-
-
-void					game_loop(int player_number)
+void					game_loop(t_env *env)
 {
-	int					width;
-	int					height;
-	int					**board;
 	char				*line;
 	int					gnl_result;
 
-	(void)player_number;
-
-	board = NULL;
 	while ((gnl_result = get_next_line(0, &line)) > 0)
 	{
-		if (board == NULL)
+		if (env->board == NULL)
 		{
-			get_board_size(line, &width, &height);
-			board = create_board(width, height);
+			get_board_size(line, &env->width, &env->height);
+			env->board = create_board(env->width, env->height);
 		}
 		free(line);
 		get_next_line(0, &line);
 		free(line);
-		board = update_board(board, width, height);
-		free(line);
-
-		TEST_display_board(board, width, height);
+		env->board = update_board(env->board, env->width, env->height);
+		if (env->piece)
+			clear_piece(env->piece);
+		env->piece = get_piece();
+		intelligence(env);
 	}
 }

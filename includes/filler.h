@@ -6,15 +6,22 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/26 00:34:25 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/26 01:05:35 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 17:20:50 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-void	game_loop(int player_number);
-int		begins_with(char *s1, char *s2);
+typedef struct						s_piece
+{
+	int								**piece;
+	int								*data;
+	int								offsetX;
+	int								offsetY;
+	int								width;
+	int								height;
+}									t_piece;
 
 typedef struct						s_player_area
 {
@@ -24,10 +31,21 @@ typedef struct						s_player_area
 	int								height;
 }									t_player_area;
 
-typedef struct						s_area
+typedef struct						s_env
 {
+	int								player_number;
+	char							*player_name;
+	int								**board;
+	int								width;
+	int								height;
+	t_piece							*piece;
 	t_player_area					p1_area;
 	t_player_area					p2_area;
-}									t_area;
+}									t_env;
+
+void	game_loop(t_env *env);
+int		begins_with(char *s1, char *s2);
+t_piece	*get_piece();
+void	intelligence(t_env *env);
 
 #endif
