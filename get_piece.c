@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/26 13:38:04 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/26 19:02:04 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 23:26:15 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,36 @@ static void				get_piece_size(char *line, int *width, int *height)
 		exit(1);
 }
 
-static int				*update_piece_line(char *line, int *piece_line, int width)
+static void				update_piece_shape_size(t_piece *piece, int x, int y)
+{
+	if (!piece->real_width)
+	{
+		piece->real_width = 1;
+		piece->real_height = 1;
+		piece->offset_x = x;
+		piece->offset_y = y;
+	}
+	else
+	{
+		if (x < piece->offset_x)
+		{
+			piece->real_width += piece->offset_x - x;
+			piece->offset_x = x;
+		}
+		else if (x >= piece->offset_x + piece->real_width)
+			piece->real_width = x - piece->offset_x + 1;
+		if (y < piece->offset_y)
+		{
+			piece->real_height += piece->offset_y - y;
+			piece->offset_y = y;
+		}
+		else if (y >= piece->offset_y + piece->real_height)
+			piece->real_height = y - piece->offset_y + 1;
+	}
+}
+
+static int				*update_piece_line(	t_piece *piece, char *line, int y,
+											int width)
 {
 	int					k;
 
@@ -55,9 +84,12 @@ static int				*update_piece_line(char *line, int *piece_line, int width)
 	while (is_piece_case(line[k]) && k < width)
 	{
 		if (line[k] == '*')
-			piece_line[k] = 1;
+		{
+			piece->piece[y][k] = 1;
+			update_piece_shape_size(piece, k, y);
+		}
 		else
-			piece_line[k] = 0;
+			piece->piece[y][k] = 0;
 		k++;
 	}
 	if (line[k] != 0 || k != width)
@@ -65,7 +97,7 @@ static int				*update_piece_line(char *line, int *piece_line, int width)
 	return (0);
 }
 
-static int				**get_piece_data(int **piece, int width, int height)
+static void				get_piece_data(t_piece *piece, int width, int height)
 {
 	int					j;
 	char				*line;
@@ -76,17 +108,18 @@ static int				**get_piece_data(int **piece, int width, int height)
 	{
 		if ((gnl_result = get_next_line(0, &line)) < 1)
 			exit(1);
-		update_piece_line(line, piece[j], width);
+		update_piece_line(piece, line, j, width);
 		free(line);
 		j++;
 	}
-	return (piece);
 }
 
 static void				create_piece(t_piece *piece, int width, int height)
 {
 	int					j;
 
+	piece->real_width = 0;
+	piece->real_height = 0;
 	piece->piece = (int**)malloc(height * sizeof(piece->piece));
 	piece->data = (int*)malloc(width * height * sizeof(piece->data));
 	ft_bzero(piece->data, width * height);
@@ -110,7 +143,7 @@ t_piece				*get_piece()
 		get_piece_size(line, &piece->width, &piece->height);
 		free(line);
 		create_piece(piece, piece->width, piece->height);
-		get_piece_data(piece->piece, piece->width, piece->height);
+		get_piece_data(piece, piece->width, piece->height);
 	}
 	return (piece);
 }

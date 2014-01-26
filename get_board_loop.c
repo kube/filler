@@ -6,7 +6,7 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/24 14:09:16 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/26 19:25:19 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 23:26:21 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 #include <libft.h>
 #include <filler.h>
 #include <get_next_line.h>
-
-
-
-// TO REMOVE
-#include <stdio.h>
-
 
 static int				is_board_case(char c)
 {
@@ -41,7 +35,6 @@ static void				update_player_area(t_player_area *area, int x, int y)
 	{
 		if (x < area->x)
 		{
-			printf("TOTO\n");
 			area->width += area->x - x;
 			area->x = x;
 		}
