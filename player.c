@@ -6,25 +6,14 @@
 /*   By: cfeijoo <cfeijoo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/23 23:00:20 by cfeijoo           #+#    #+#             */
-/*   Updated: 2014/01/25 16:29:27 by cfeijoo          ###   ########.fr       */
+/*   Updated: 2014/01/26 01:05:29 by cfeijoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <libft.h>
 #include <get_next_line.h>
-
-static int			begins_with(char *s1, char *s2)
-{
-	while (*s2 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	if (!*s1)
-		return (1);
-	return (0);
-}
+#include <filler.h>
 
 static int			get_player_info(char **player_name)
 {
@@ -55,6 +44,6 @@ int					main(void)
 	char			*player_name;
 
 	player_number = get_player_info(&player_name);
-	game_loop(player_number, player_name);
+	game_loop(player_number);
 	return (0);
 }
